@@ -1,0 +1,120 @@
+/* SCSS goes here */
+
+@mixin prefix($name, $arg) {
+  -webkit-#{$name}: #{$arg};
+  -ms-#{$name}: #{$arg};
+  -moz-#{$name}: #{$arg};
+  -o-#{$name}: #{$arg};
+  #{$name}: #{$arg};
+}
+
+$break : "screen and (min-width: 980px)";
+
+html,
+body {
+    width: 100%;
+    min-width: 320px;
+}
+
+.page-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    @include prefix(box-orient, vertical);
+
+    #product-view {
+        margin: 40px 0 0;
+        text-align: center;
+        border-bottom: 2px solid #e5e5e5;
+        padding-bottom: 40px;
+        opacity: 0;
+
+        @media #{$break} {
+            @include prefix(box-ordinal-group, 2);
+            border-top: 2px solid #e5e5e5;
+            border-bottom: none;
+            padding-bottom: 0;
+            padding-top: 80px;
+            margin: 0;
+        }
+
+        &.show {
+            @include prefix(animation, fadeIn .5s linear 1);
+            @include prefix (animation-fill-mode, forwards);
+        }
+
+        .product-img {
+            img {
+                width: 100%;
+                max-width: 279px;
+            }
+        }
+
+        .product-header {
+            margin: 40px 0;
+            font-weight: normal;
+        }
+    }
+
+    #product-selector {
+        width: 100%;
+        white-space: nowrap;
+        overflow-x: scroll;
+        position: relative;
+        @include prefix(transition, 'all .4s');
+
+        @media #{$break} {
+            @include prefix(box-ordinal-group, 1);
+            border-top: none;
+        }
+
+        .product-detail-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 30px 25px 10px;
+            text-align: center;
+            cursor: pointer;
+
+            .product-detail {
+                height: 35px;
+                width: 35px;
+                background: #e5e5e5;
+                @include prefix(transition, 'all .4s');
+            }
+
+            .product-id {
+                display: inline-block;
+                opacity: 0;
+                @include prefix(transition, 'all .4s');
+                margin-top: 10px;
+            }
+
+            &.active,
+            &:hover {
+                .product-detail {
+                    background: #000;
+                }
+                .product-id {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+// Fadein animation
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-moz-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-ms-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
